@@ -10,6 +10,7 @@ import {
   where,
   QueryConstraint,
   DocumentData,
+  UpdateData,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -41,10 +42,10 @@ export async function addDocument<T extends DocumentData>(
   return docRef.id;
 }
 
-export async function updateDocument<T extends DocumentData>(
+export async function updateDocument(
   collectionName: string,
   docId: string,
-  data: Partial<T>
+  data: UpdateData<DocumentData>
 ): Promise<void> {
   const docRef = doc(db, collectionName, docId);
   await updateDoc(docRef, data);
